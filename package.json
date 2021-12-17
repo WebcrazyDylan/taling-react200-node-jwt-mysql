@@ -1,0 +1,35 @@
+{
+  "name": "project2020",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "client": "cd client && npm start",
+    "server": "nodemon server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+  },
+  "dependencies": {
+    "axios": "^0.24.0",
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.1",
+    "concurrently": "^6.4.0",
+    "cookie-parser": "~1.4.6",
+    "debug": "~2.6.9",
+    "express": "~4.17.1",
+    "fs": "0.0.2",
+    "http-errors": "~1.8.1",
+    "jade": "~1.11.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.29.1",
+    "morgan": "~1.10.0",
+    "multer": "^1.4.4",
+    "mybatis-mapper": "^0.6.5",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "node-cron": "^2.0.3",
+    "nodemailer": "^6.7.2",
+    "save": "^2.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}

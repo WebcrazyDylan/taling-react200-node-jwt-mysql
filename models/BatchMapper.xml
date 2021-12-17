@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BatchMapper">  
+  <insert id="insertBatchlog"> 
+    INSERT INTO react_batch_log
+    (
+        batch_cd
+        , batch_nm
+        , batch_log
+        , reg_date
+    )
+    VALUES (
+        CONCAT("BL",DATE_FORMAT(now(), '%Y%m%d%H%i%s'))
+        , #{is_Batchnm}
+        , #{is_Batchlog}
+        , DATE_FORMAT(now(), '%Y%m%d%H%i%s')
+    )
+  </insert>
+</mapper>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SwToolsMapper">  
+  <select id="selectSwToolsList">
+      SELECT 
+        swt_code
+        , swt_toolname
+        , swt_function
+        , swt_imagepath
+        , swt_big_imgpath
+        , swt_comments
+        , swt_demo_site
+        , swt_manual_path
+        , swt_github_url
+        , reg_date
+      FROM react_swtool
+      <if test="is_Swtcode != null && is_Swtcode != ''">
+        WHERE swt_code = #{is_Swtcode}
+      </if>
+      ORDER BY update_date DESC
+  </select>
+
+  <insert id="insertSwToolsInfo"> 
+    INSERT INTO react_swtool
+    (
+        swt_code
+        , swt_toolname
+        , swt_function
+        , swt_comments
+        , swt_demo_site
+        , swt_github_url
+        <if test="is_LabelImg != null && is_LabelImg != ''">
+          , swt_imagepath
+        </if>
+        <if test="is_MainImg != null && is_MainImg != ''">
+          , swt_big_imgpath
+        </if>
+        <if test="is_MenualName != null && is_MenualName != ''">
+          , swt_manual_path
+        </if>
+        , reg_date
+        , reg_user
+        , update_date
+        , update_user
+    )
+    VALUES (
+      CONCAT('USW', DATE_FORMAT(now(), '%Y%m%d%H%i%s'))
+      , #{is_Swt_toolname}
+      , #{is_Swt_function}      
+      , #{is_Comments}
+      , #{is_Swt_demo_site}
+      , #{is_Giturl}
+      <if test="is_LabelImg != null && is_LabelImg != ''">
+        , #{is_LabelImg}
+      </if>
+      <if test="is_MainImg != null && is_MainImg != ''">
+        , #{is_MainImg}
+      </if>
+      <if test="is_MenualName != null && is_MenualName != ''">
+        , #{is_MenualName}
+      </if>
+      , DATE_FORMAT(now(), '%Y%m%d%H%i%s')
+      , #{is_Email}
+      , DATE_FORMAT(now(), '%Y%m%d%H%i%s')
+      , #{is_Email}
+    )
+  </insert>
+
+  <update id="updateSwToolsInfo"> 
+    UPDATE react_swtool
+    SET
+        swt_toolname = #{is_Swt_toolname}
+        , swt_function = #{is_Swt_function}
+        , swt_comments = #{is_Comments}
+        , swt_demo_site = #{is_Swt_demo_site}
+        , swt_github_url = #{is_Giturl}
+        <if test="is_LabelImg != null && is_LabelImg != ''">
+          , swt_imagepath = #{is_LabelImg}
+        </if>
+        <if test="is_MainImg != null && is_MainImg != ''">
+          , swt_big_imgpath = #{is_MainImg}
+        </if>
+        <if test="is_MenualName != null && is_MenualName != ''">
+          , swt_manual_path = #{is_MenualName}
+        </if>
+        , update_date = DATE_FORMAT(now(), '%Y%m%d%H%i%s')
+        , update_user = #{is_Email}
+    WHERE swt_code = #{is_beforeSwtcode}
+  </update>
+
+  <delete id="deleteSwToolsInfo">
+    DELETE FROM react_swtool
+    WHERE swt_code = #{is_SwtCd}
+  </delete>
+</mapper>
